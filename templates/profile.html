@@ -9,15 +9,28 @@
             <img src="{{user.image_url}}" class="img-fluid" alt="">
 
         </div>
-        <div class="col-9">
-            <h2>{{user.first_name}} {{user.last_name}}</h1>
+        <div class="col-6">
+            <h2>{{user.first_name}} {{user.last_name}}</h2>
             <div class="col d-flex">
                     <a class="btn btn-primary me-2" href="/users/{{user.id}}/edit" role="button">Edit</a>
                 <form action="/users/{{user.id}}/delete", method="POST">
                     <button class="btn btn-danger" type="submit">Delete</button>
                 </form>
             </div>
+
+            <br>
+
+            <h2>Posts</h2>
+            <ul>
+                {% for post in user.posts %}
+                <li><a href="/posts/{{ post.id}}">{{post.title}}</a></li>
+                {% endfor %}
+            </ul>
+          
+            <a href="/users/{{ user.id }}/posts/create" class="btn btn-primary">Add Post</a>
+
         </div>
+
     </div>
 
   

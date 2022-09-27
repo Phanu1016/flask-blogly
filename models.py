@@ -1,3 +1,4 @@
+import datetime
 from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
@@ -25,3 +26,15 @@ class User(db.Model):
     image_url = db.Column(db.String(200),
                           nullable=False,
                           default='https://i.imgur.com/iUG6xnZ.png')
+
+class Post(db.Model):
+    __tablename__ = "posts"
+
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(100), nullable=False)
+    content = db.Column(db.String(10000), nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.datetime.now, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+
+    user = db.relationship('User', backref='posts')
+
