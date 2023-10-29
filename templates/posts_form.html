@@ -11,14 +11,30 @@
             <label for="firstName" class="form-label">Title</label>
             <input type="text" class="form-control" name="title-input" id="title-input">
         </div>
+
         <div class="mb-3">
             <label for="lastName" class="form-label">Content</label>
             <textarea class="form-control" name="content-input" id="content-input" rows="3"></textarea>
         </div>
+
+        <div class="mb-3">
+            {% for tag in tags %}
+                <div>
+                    <input
+                    type="checkbox"
+                    value="{{ tag.id }}"
+                    id="tag_{{ tag.id }}"
+                    name="tags">
+                    <label class="form-label" for="tag_{{ tag.id }}">
+                        {{ tag.name }}
+                    </label>
+                </div>
+            {% endfor %}
+        </div>
+
         <div class="mb-3">
             <button class="btn btn-primary" type="submit">Create</button>
             <a href="/users/{{user.id}}" class="btn btn-danger" type="submit">Cancel</a>
-
         </div>
     </div>
 </form>
